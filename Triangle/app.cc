@@ -143,6 +143,7 @@ private:
 		std::cout << std::boolalpha << graphicsFamily.has_value() << std::endl;
 
 		graphicsFamily = 0;
+		std::cout<<std::boolalpha
 	}
 
 	auto mainLoop() -> void {
