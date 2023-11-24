@@ -964,7 +964,7 @@ private:
 		if (vkQueueSubmit(this->graphicsQueue, 1, &submitInfo, this->inFlightFences[currentFrame]) != VK_SUCCESS)
 			throw std::runtime_error("failed to submit draw command buffer!");
 
-		VkSwapchainKHR swapChains[] = { swapChain };
+		VkSwapchainKHR swapChains[] = { this->swapChain };
 
 		auto presentInfo = VkPresentInfoKHR{
 			.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,
@@ -985,6 +985,8 @@ private:
 		else if (result != VK_SUCCESS) {
 			throw std::runtime_error("failed queue present");
 		}
+
+		WriteScreenshots();
 
 		currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
 	}
@@ -1044,6 +1046,16 @@ private:
 		SDL_DestroyWindow(this->window);
 		SDL_Vulkan_UnloadLibrary();
 		SDL_Quit();
+	}
+
+	int shotTry = 0;
+
+	auto WriteScreenshots() -> void {
+		if (shotTry > 3) return;
+
+
+
+		shotTry++;
 	}
 
 	static auto readFile(const std::string& filename) -> std::vector<char> {
